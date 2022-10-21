@@ -1,0 +1,28 @@
+<form *ngIf ="todolistForm"[formGroup] = "todolistForm" (ngSubmit)="submitAddTodolist()" >
+  <p-dialog [(visible)]="display" header="Add Todolist" [style]="{width: '500px' , height : '500px'}" [baseZIndex]="9999"
+  [modal]="true" (onHide)="cancel()" >
+    <div class="p-grid">
+       <div class="p-col-12">
+            <label>Header</label>
+            <input type="text" pInputText style="width : 100%"  formControlName="header"
+                 [ngClass]="{'ng-dirty': todolistForm.get('header')?.invalid && (todolistForm.get('header')?.dirty || todolistForm.get('header')?.touched )}"/>
+           <div *ngIf="todolistForm.get('header')?.invalid && (todolistForm.get('header')?.dirty || todolistForm.get('header')?.touched )">
+                <small *ngIf="todolistForm.get('header')?.errors?.['required']">This field is required</small>
+           </div>   
+       </div>
+       <div class="p-col-12">
+            <label>Detail</label>
+            <input type="text" pInputText style="width : 100%" formControlName="detail"/>
+       </div>
+        <div class="p-col-12">
+            <label>Remind Date</label>
+            <p-calendar dateFormat="dd/mm/yy" [style]="{'width': '100%'}"formControlName="remindDate"></p-calendar>
+      </div>
+    </div>
+    <p-footer>
+        <button pButton type="button" label="Cancel" class="p-button-secondary p-button-sm mr-3" (click)="cancel()"></button>
+        <button pButton type="submit" label="Submit" class="p-button-info p-button-sm "></button>
+    </p-footer>
+</p-dialog>
+</form>
+
